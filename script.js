@@ -1,6 +1,7 @@
 let translations = {};
 let currentLanguage = 'en';
-let promptHistory = []; // To store the history of prompt changes
+let undoStack = []; // Stack for undo operations
+let redoStack = []; // Stack for redo operations
 
 // Load translations
 async function loadTranslations() {
@@ -55,7 +56,8 @@ function changeLanguage(lang) {
   document.getElementById('copy-prompt-btn').title = texts['copy_prompt'];
   document.getElementById('clear-prompt-btn').title = texts['clear_prompt'];
   document.getElementById('random-prompt-btn').title = texts['generate_random_prompt'];
-  document.getElementById('undo-prompt-btn').title = texts['undo_prompt']; // New
+  document.getElementById('undo-prompt-btn').title = texts['undo_prompt'];
+  document.getElementById('redo-prompt-btn').title = texts['redo_prompt'];
 
   // Update current language abbreviation
   document.getElementById('current-language').textContent = translations[lang]['language_abbr'];
@@ -113,13 +115,23 @@ function displayDropdowns(data) {
   }
 }
 
+// Save the current prompt to the undo stack and clear redo stack
+function saveState() {
+  const promptTextarea = document.getElementById('prompt');
+  undoStack.push(promptTextarea.value);
+  // Limit undo stack size to 50
+  if (undoStack.length > 50) {
+    undoStack.shift();
+  }
+  redoStack = []; // Clear redo stack
+}
+
 // Add selected keyword to prompt and scroll to bottom
 function addToPrompt(keyword) {
   if (keyword) {
-    const promptTextarea = document.getElementById('prompt');
-    // Save current prompt to history before adding new text
-    promptHistory.push(promptTextarea.value);
+    saveState();
 
+    const promptTextarea = document.getElementById('prompt');
     promptTextarea.value += (promptTextarea.value ? ' ' : '') + keyword;
 
     // Scroll to the bottom
@@ -130,12 +142,26 @@ function addToPrompt(keyword) {
 // Copy prompt to clipboard
 function copyPrompt() {
   const promptTextarea = document.getElementById('prompt');
+  const copyButton = document.getElementById('copy-prompt-btn');
+
   navigator.clipboard
     .writeText(promptTextarea.value)
     .then(() => {
-      alert(translations[currentLanguage]['prompt_copied']);
+      // Visual feedback for success
+      copyButton.classList.remove('error');
+      copyButton.classList.add('success');
+      // Remove the class after the animation duration
+      setTimeout(() => {
+        copyButton.classList.remove('success');
+      }, 1000);
     })
     .catch(err => {
+      // Visual feedback for error
+      copyButton.classList.remove('success');
+      copyButton.classList.add('error');
+      setTimeout(() => {
+        copyButton.classList.remove('error');
+      }, 1000);
       console.error('Failed to copy text: ', err);
     });
 }
@@ -143,20 +169,72 @@ function copyPrompt() {
 // Clear the prompt
 function clearPrompt() {
   const promptTextarea = document.getElementById('prompt');
+  const clearButton = document.getElementById('clear-prompt-btn');
   if (promptTextarea.value) {
-    // Save current prompt to history before clearing
-    promptHistory.push(promptTextarea.value);
+    saveState();
     promptTextarea.value = '';
+
+    // Visual feedback for success
+    clearButton.classList.remove('error');
+    clearButton.classList.add('success');
+    setTimeout(() => {
+      clearButton.classList.remove('success');
+    }, 1000);
+  } else {
+    // Visual feedback for error
+    clearButton.classList.remove('success');
+    clearButton.classList.add('error');
+    setTimeout(() => {
+      clearButton.classList.remove('error');
+    }, 1000);
   }
 }
 
 // Undo last action
 function undoPrompt() {
   const promptTextarea = document.getElementById('prompt');
-  if (promptHistory.length > 0) {
-    promptTextarea.value = promptHistory.pop();
+  const undoButton = document.getElementById('undo-prompt-btn');
+  if (undoStack.length > 0) {
+    redoStack.push(promptTextarea.value);
+    promptTextarea.value = undoStack.pop();
+
+    // Visual feedback for success
+    undoButton.classList.remove('error');
+    undoButton.classList.add('success');
+    setTimeout(() => {
+      undoButton.classList.remove('success');
+    }, 1000);
   } else {
-    alert(translations[currentLanguage]['nothing_to_undo'] || 'Nothing to undo');
+    // Visual feedback for error
+    undoButton.classList.remove('success');
+    undoButton.classList.add('error');
+    setTimeout(() => {
+      undoButton.classList.remove('error');
+    }, 1000);
+  }
+}
+
+// Redo last undone action
+function redoPrompt() {
+  const promptTextarea = document.getElementById('prompt');
+  const redoButton = document.getElementById('redo-prompt-btn');
+  if (redoStack.length > 0) {
+    undoStack.push(promptTextarea.value);
+    promptTextarea.value = redoStack.pop();
+
+    // Visual feedback for success
+    redoButton.classList.remove('error');
+    redoButton.classList.add('success');
+    setTimeout(() => {
+      redoButton.classList.remove('success');
+    }, 1000);
+  } else {
+    // Visual feedback for error
+    redoButton.classList.remove('success');
+    redoButton.classList.add('error');
+    setTimeout(() => {
+      redoButton.classList.remove('error');
+    }, 1000);
   }
 }
 
@@ -188,13 +266,13 @@ function applyTheme() {
 
 // Generate Random Prompt and scroll to bottom
 function generateRandomPrompt() {
+  const randomButton = document.getElementById('random-prompt-btn');
   fetch(`keywords_${currentLanguage}.json`)
     .then(response => response.json())
     .then(data => {
-      const promptTextarea = document.getElementById('prompt');
-      // Save current prompt to history before adding new text
-      promptHistory.push(promptTextarea.value);
+      saveState();
 
+      const promptTextarea = document.getElementById('prompt');
       const categories = Object.keys(data);
 
       const allKeywords = [];
@@ -219,13 +297,28 @@ function generateRandomPrompt() {
       // Scroll to the bottom
       promptTextarea.scrollTop = promptTextarea.scrollHeight;
 
-      // Visual feedback
+      // Visual feedback for success
+      randomButton.classList.remove('error');
+      randomButton.classList.add('success');
+      setTimeout(() => {
+        randomButton.classList.remove('success');
+      }, 1000);
+
+      // Visual feedback on prompt textarea
       promptTextarea.classList.add('highlight');
       setTimeout(() => {
         promptTextarea.classList.remove('highlight');
       }, 500);
     })
-    .catch(error => console.error('Error generating random prompt:', error));
+    .catch(error => {
+      console.error('Error generating random prompt:', error);
+      // Visual feedback for error
+      randomButton.classList.remove('success');
+      randomButton.classList.add('error');
+      setTimeout(() => {
+        randomButton.classList.remove('error');
+      }, 1000);
+    });
 }
 
 // Close language menu when clicking outside
