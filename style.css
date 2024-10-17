@@ -1,0 +1,146 @@
+/* Define color variables */
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --input-bg-color: #f9f9f9;
+    --input-border-color: #cccccc;
+    --button-bg-color: #007BFF;
+    --button-text-color: #ffffff;
+  }
+  
+  [data-theme="dark"] {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --input-bg-color: #1e1e1e;
+    --input-border-color: #444444;
+    --button-bg-color: #1a73e8;
+    --button-text-color: #ffffff;
+  }
+  
+  /* General Styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 10px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Settings Section */
+  .settings {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  #language-select {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+  }
+  
+  #theme-toggle {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+  }
+  
+  /* Prompt and Buttons */
+  .prompt-section {
+    margin-bottom: 20px;
+  }
+  
+  #prompt {
+    width: 100%;
+    height: 100px;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    resize: vertical;
+  }
+  
+  .buttons {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .buttons button {
+    flex: 1;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+  }
+  
+  .buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Dropdown Groups */
+  #dropdown-groups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .dropdown-group {
+    flex: 1 1 200px;
+    min-width: 200px;
+  }
+  
+  .dropdown-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-color);
+  }
+  
+  .dropdown-group select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .buttons {
+      flex-direction: column;
+    }
+  
+    .settings {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  

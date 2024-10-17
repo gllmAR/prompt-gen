@@ -1,0 +1,51 @@
+{
+  "en": {
+    "language_name": "English",
+    "title": "Visual Prompt Builder",
+    "select": "Select",
+    "prompt_placeholder": "Your prompt will appear here...",
+    "copy_prompt": "📋 Copy Prompt",
+    "clear_prompt": "🗑️ Clear Prompt",
+    "prompt_copied": "Prompt copied to clipboard!",
+    "switch_to_dark": "🌜",
+    "switch_to_light": "🌞",
+    "language": "Language"
+  },
+  "fr": {
+    "language_name": "Français",
+    "title": "Générateur de Prompts Visuels",
+    "select": "Sélectionner",
+    "prompt_placeholder": "Votre prompt apparaîtra ici...",
+    "copy_prompt": "📋 Copier le Prompt",
+    "clear_prompt": "🗑️ Effacer le Prompt",
+    "prompt_copied": "Prompt copié dans le presse-papiers !",
+    "switch_to_dark": "🌜",
+    "switch_to_light": "🌞",
+    "language": "Langue"
+  },
+  "la": {
+    "language_name": "Latin",
+    "title": "Générateur de Prompts Visuels",
+    "select": "Sélectionner",
+    "prompt_placeholder": "Votre prompt apparaîtra ici...",
+    "copy_prompt": "📋 Copier le Prompt",
+    "clear_prompt": "🗑️ Effacer le Prompt",
+    "prompt_copied": "Prompt copié dans le presse-papiers !",
+    "switch_to_dark": "🌜",
+    "switch_to_light": "🌞",
+    "language": "Langue"
+  },
+  "es": {
+    "language_name": "Español",
+    "title": "Creador de Prompts Visuales",
+    "select": "Seleccionar",
+    "prompt_placeholder": "Tu prompt aparecerá aquí...",
+    "copy_prompt": "📋 Copiar Prompt",
+    "clear_prompt": "🗑️ Borrar Prompt",
+    "prompt_copied": "¡Prompt copiado al portapapeles!",
+    "switch_to_dark": "🌜",
+    "switch_to_light": "🌞",
+    "language": "Idioma"
+  }
+
+}
