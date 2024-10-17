@@ -1,51 +1,62 @@
 {
   "en": {
     "language_name": "English",
+    "language_abbr": "EN",
+    "language_flag": "🇬🇧",
     "title": "Visual Prompt Builder",
     "select": "Select",
     "prompt_placeholder": "Your prompt will appear here...",
-    "copy_prompt": "📋 Copy Prompt",
-    "clear_prompt": "🗑️ Clear Prompt",
+    "copy_prompt": "Copy Prompt",
+    "clear_prompt": "Clear Prompt",
     "prompt_copied": "Prompt copied to clipboard!",
     "switch_to_dark": "🌜",
     "switch_to_light": "🌞",
-    "language": "Language"
-  },
-  "fr": {
-    "language_name": "Français",
-    "title": "Générateur de Prompts Visuels",
-    "select": "Sélectionner",
-    "prompt_placeholder": "Votre prompt apparaîtra ici...",
-    "copy_prompt": "📋 Copier le Prompt",
-    "clear_prompt": "🗑️ Effacer le Prompt",
-    "prompt_copied": "Prompt copié dans le presse-papiers !",
-    "switch_to_dark": "🌜",
-    "switch_to_light": "🌞",
-    "language": "Langue"
-  },
-  "la": {
-    "language_name": "Latin",
-    "title": "Générateur de Prompts Visuels",
-    "select": "Sélectionner",
-    "prompt_placeholder": "Votre prompt apparaîtra ici...",
-    "copy_prompt": "📋 Copier le Prompt",
-    "clear_prompt": "🗑️ Effacer le Prompt",
-    "prompt_copied": "Prompt copié dans le presse-papiers !",
-    "switch_to_dark": "🌜",
-    "switch_to_light": "🌞",
-    "language": "Langue"
+    "language": "Language",
+    "generate_random_prompt": "Generate Random Prompt"
   },
   "es": {
     "language_name": "Español",
+    "language_abbr": "ES",
+    "language_flag": "🇪🇸",
     "title": "Creador de Prompts Visuales",
     "select": "Seleccionar",
     "prompt_placeholder": "Tu prompt aparecerá aquí...",
-    "copy_prompt": "📋 Copiar Prompt",
-    "clear_prompt": "🗑️ Borrar Prompt",
+    "copy_prompt": "Copiar Prompt",
+    "clear_prompt": "Borrar Prompt",
     "prompt_copied": "¡Prompt copiado al portapapeles!",
     "switch_to_dark": "🌜",
     "switch_to_light": "🌞",
-    "language": "Idioma"
+    "language": "Idioma",
+    "generate_random_prompt": "Generar Prompt Aleatorio"
+  },
+  "fr": {
+    "language_name": "Français",
+    "language_abbr": "FR",
+    "language_flag": "🇫🇷",
+    "title": "Générateur de Prompts Visuels",
+    "select": "Sélectionner",
+    "prompt_placeholder": "Votre prompt apparaîtra ici...",
+    "copy_prompt": "Copier le Prompt",
+    "clear_prompt": "Effacer le Prompt",
+    "prompt_copied": "Prompt copié dans le presse-papiers !",
+    "switch_to_dark": "🌜",
+    "switch_to_light": "🌞",
+    "language": "Langue",
+    "generate_random_prompt": "Générer un Prompt Aléatoire"
+  },
+  "la": {
+    "language_name": "Latine",
+    "language_abbr": "LA",
+    "language_flag": "🏛️",
+    "title": "Constructor Visorum Promotorum",
+    "select": "Selige",
+    "prompt_placeholder": "Promptum tuum hic apparebit...",
+    "copy_prompt": "Copia Promptum",
+    "clear_prompt": "Dele Promptum",
+    "prompt_copied": "Promptum in memoriam positum est!",
+    "switch_to_dark": "🌜",
+    "switch_to_light": "🌞",
+    "language": "Lingua",
+    "generate_random_prompt": "Genera Promptum Casuale"
   }
-
 }

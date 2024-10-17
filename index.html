@@ -12,25 +12,31 @@
 <div class="container">
   <!-- Settings Section -->
   <div class="settings">
-    <select id="language-select" onchange="changeLanguage(this.value)">
-      <!-- Options will be populated dynamically -->
-    </select>
     <button id="theme-toggle" onclick="toggleTheme()">🌞</button>
+    <div class="language-selector">
+      <button id="language-btn" onclick="toggleLanguageMenu()">🌐 <span id="current-language">EN</span></button>
+      <div id="language-menu" class="language-menu">
+        <!-- Options will be populated dynamically -->
+      </div>
+    </div>
   </div>
 
   <h1 id="title">Visual Prompt Builder</h1>
 
-  <!-- Prompt Section -->
-  <div class="prompt-section">
-    <textarea id="prompt" placeholder=""></textarea>
-    <div class="buttons">
-      <button id="copy-prompt-btn" onclick="copyPrompt()"></button>
-      <button id="clear-prompt-btn" onclick="clearPrompt()"></button>
-    </div>
-  </div>
-
   <!-- Dropdown Menus -->
   <div id="dropdown-groups"></div>
+</div>
+
+<!-- Prompt Section -->
+<div class="prompt-section">
+  <div class="container">
+    <textarea id="prompt" placeholder=""></textarea>
+    <div class="buttons">
+      <button id="copy-prompt-btn" onclick="copyPrompt()" title="Copy Prompt">📋</button>
+      <button id="clear-prompt-btn" onclick="clearPrompt()" title="Clear Prompt">🗑️</button>
+      <button id="random-prompt-btn" onclick="generateRandomPrompt()" title="Generate Random Prompt">🎲</button>
+    </div>
+  </div>
 </div>
 
 <!-- Link to external JavaScript file -->
