@@ -1,5 +1,6 @@
 let translations = {};
 let currentLanguage = 'en';
+let promptHistory = []; // To store the history of prompt changes
 
 // Load translations
 async function loadTranslations() {
@@ -54,6 +55,7 @@ function changeLanguage(lang) {
   document.getElementById('copy-prompt-btn').title = texts['copy_prompt'];
   document.getElementById('clear-prompt-btn').title = texts['clear_prompt'];
   document.getElementById('random-prompt-btn').title = texts['generate_random_prompt'];
+  document.getElementById('undo-prompt-btn').title = texts['undo_prompt']; // New
 
   // Update current language abbreviation
   document.getElementById('current-language').textContent = translations[lang]['language_abbr'];
@@ -115,6 +117,9 @@ function displayDropdowns(data) {
 function addToPrompt(keyword) {
   if (keyword) {
     const promptTextarea = document.getElementById('prompt');
+    // Save current prompt to history before adding new text
+    promptHistory.push(promptTextarea.value);
+
     promptTextarea.value += (promptTextarea.value ? ' ' : '') + keyword;
 
     // Scroll to the bottom
@@ -137,7 +142,22 @@ function copyPrompt() {
 
 // Clear the prompt
 function clearPrompt() {
-  document.getElementById('prompt').value = '';
+  const promptTextarea = document.getElementById('prompt');
+  if (promptTextarea.value) {
+    // Save current prompt to history before clearing
+    promptHistory.push(promptTextarea.value);
+    promptTextarea.value = '';
+  }
+}
+
+// Undo last action
+function undoPrompt() {
+  const promptTextarea = document.getElementById('prompt');
+  if (promptHistory.length > 0) {
+    promptTextarea.value = promptHistory.pop();
+  } else {
+    alert(translations[currentLanguage]['nothing_to_undo'] || 'Nothing to undo');
+  }
 }
 
 // Theme Toggle Functionality
@@ -172,6 +192,9 @@ function generateRandomPrompt() {
     .then(response => response.json())
     .then(data => {
       const promptTextarea = document.getElementById('prompt');
+      // Save current prompt to history before adding new text
+      promptHistory.push(promptTextarea.value);
+
       const categories = Object.keys(data);
 
       const allKeywords = [];
