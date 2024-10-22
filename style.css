@@ -1,46 +1,32 @@
-/* Define color variables */
-:root {
-  --background-color: #ffffff;
-  --text-color: #000000;
-  --input-bg-color: #f9f9f9;
-  --input-border-color: #cccccc;
-  --button-bg-color: #007BFF;
-  --button-text-color: #ffffff;
-  --success-color: #28a745; /* Green */
-  --error-color: #dc3545;   /* Red */
-}
-
-[data-theme="dark"] {
-  --background-color: #121212;
-  --text-color: #ffffff;
-  --input-bg-color: #1e1e1e;
-  --input-border-color: #444444;
-  --button-bg-color: #1a73e8;
-  --button-text-color: #ffffff;
-  --success-color: #28a745;
-  --error-color: #dc3545;
-}
-
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 10px;
-}
-
-/* Settings Section */
+/* Flexbox for settings and title in one line */
 .settings {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0px; /* Add some spacing between the title and the content */
+}
+
+h1 {
+  flex: 1; /* Let the title take up remaining space */
+  margin: 0;
+  text-align: center;
+  font-size: calc(1rem + 1vw); /* Dynamically adjust the size based on viewport */
+  white-space: nowrap; /* Prevent the title from wrapping onto multiple lines */
+  overflow: hidden; /* Hide text overflow */
+  text-overflow: ellipsis; /* Show '...' when the title is too long */
+}
+
+/* Buttons for language and theme toggle should align properly */
+.language-selector, #theme-toggle {
+  margin-left: 10px; /* Add spacing between buttons */
+}
+
+#theme-toggle {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
 }
 
 .language-selector {
@@ -79,19 +65,79 @@ body {
   font-size: 16px;
   cursor: pointer;
   color: var(--text-color);
+  display: inline-flex;
+  align-items: center;
 }
 
-#theme-toggle {
-  font-size: 24px;
-  background: none;
-  border: none;
+/* Set a fixed height for the dropdown categories and make them scrollable */
+#dropdown-groups {
+  max-height: calc(100vh - 150px); /* Reduce height to ensure the prompt section fits well */
+  overflow-y: auto; /* Enable scrolling only within the dropdown section */
+  padding-bottom: 20px; /* Prevent content from going under the prompt section */
+}
+
+/* Fix the prompt section at the bottom but make it more compact */
+.prompt-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--background-color);
+  padding: 5px 10px; /* Reduce padding to make the section more compact */
+  border-top: 1px solid var(--input-border-color);
+  z-index: 10; /* Ensure it's above the content */
+}
+
+/* Adjust the container to avoid double scrollbar */
+body {
+  overflow: hidden; /* Remove the outer scrollbar */
+}
+
+/* Reduce the height of the prompt input and buttons to make the bottom section smaller */
+#prompt {
+  width: 100%;
+  height: 40px; /* Make the input field shorter */
+  font-size: 14px; /* Reduce font size to save space */
+  margin-top: 5px;
+  padding: 5px; /* Smaller padding */
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  resize: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.buttons button {
+  flex: 1;
+  padding: 5px; /* Reduce padding on buttons to make them smaller */
+  font-size: 16px; /* Reduce button font size */
   cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  border-radius: 5px;
+}
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
   color: var(--text-color);
 }
 
-h1 {
-  text-align: center;
-  margin: 10px 0;
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 10px;
+  padding-bottom: 10px; /* Ensure enough space for the prompt section */
 }
 
 /* Dropdown Groups */
@@ -123,59 +169,6 @@ h1 {
   border: 1px solid var(--input-border-color);
   background-color: var(--input-bg-color);
   color: var(--text-color);
-}
-
-/* Prompt Section */
-.prompt-section {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--background-color);
-  padding: 10px;
-  border-top: 1px solid var(--input-border-color);
-}
-
-.prompt-section .container {
-  max-width: 900px;
-  margin: auto;
-}
-
-#prompt {
-  width: 100%;
-  height: 60px;
-  font-size: 16px;
-  margin-top: 5px;
-  padding: 8px;
-  border: 1px solid var(--input-border-color);
-  border-radius: 5px;
-  background-color: var(--input-bg-color);
-  color: var(--text-color);
-  resize: none;
-}
-
-/* Action Buttons */
-.buttons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 5px;
-}
-
-.buttons button {
-  flex: 1;
-  padding: 8px;
-  font-size: 20px;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: var(--text-color);
-  border: 2px solid transparent; /* Default border */
-  border-radius: 5px;
-}
-
-/* Hover effect */
-.buttons button:hover {
-  color: var(--button-bg-color);
 }
 
 /* Success and Error Animations */
@@ -261,6 +254,29 @@ h1 {
   }
 
   #prompt {
-    height: 80px;
+    height: 60px; /* Increase the height slightly for smaller screens */
   }
+}
+
+/* Define color variables */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --input-bg-color: #f9f9f9;
+  --input-border-color: #cccccc;
+  --button-bg-color: #007BFF;
+  --button-text-color: #ffffff;
+  --success-color: #28a745; /* Green */
+  --error-color: #dc3545;   /* Red */
+}
+
+[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --input-bg-color: #1e1e1e;
+  --input-border-color: #444444;
+  --button-bg-color: #1a73e8;
+  --button-text-color: #ffffff;
+  --success-color: #28a745;
+  --error-color: #dc3545;
 }
