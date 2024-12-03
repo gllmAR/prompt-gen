@@ -1,2 +1,5 @@
 # prompt-gen
-prompt-generator
+
+Multilingual prompt-generator
+
+![Screenshot](screenshot.png)
